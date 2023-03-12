@@ -1,0 +1,195 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2580
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red15\green112\blue1;\red255\green255\blue254;\red0\green0\blue255;
+\red255\green255\blue254;\red25\green25\blue25;\red101\green76\blue29;\red144\green1\blue18;\red0\green0\blue0;
+\red15\green112\blue1;\red19\green120\blue72;}
+{\*\expandedcolortbl;;\cssrgb\c0\c50196\c0;\cssrgb\c100000\c100000\c99608;\cssrgb\c0\c0\c100000;
+\cssrgb\c100000\c100000\c99608;\cssrgb\c12941\c12941\c12941;\cssrgb\c47451\c36863\c14902;\cssrgb\c63922\c8235\c8235;\cssrgb\c0\c0\c0;
+\cssrgb\c0\c50196\c0;\cssrgb\c3529\c53333\c35294;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f0\fs24 \cf2 \cb3 \expnd0\expndtw0\kerning0
+-- ****BAI 1\cf4 \cb5 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec4 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 SELECT\cf6 \strokec6  \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         \cf7 \strokec7 CONCAT\cf6 \strokec6 (FirstName,\cf8 \strokec8 ' '\cf6 \strokec6 ,MiddleName,\cf8 \strokec8 ' '\cf6 \strokec6 ,LastName) \cf4 \strokec4 AS\cf6 \strokec6  FullName,\cb1 \
+\cb5         BirthDate,\cb1 \
+\cb5         \cf4 \strokec4 CASE\cf6 \strokec6  \cf4 \strokec4 WHEN\cf6 \strokec6  Gender \cf9 \strokec9 =\cf6 \strokec6  \cf8 \strokec8 'M'\cf6 \strokec6  \cf4 \strokec4 THEN\cf6 \strokec6  \cf8 \strokec8 'MALE'\cf6 \strokec6  \cf4 \strokec4 WHEN\cf6 \strokec6  Gender \cf9 \strokec9 =\cf6 \strokec6  \cf8 \strokec8 'F'\cf6 \strokec6  \cf4 \strokec4 THEN\cf6 \strokec6  \cf8 \strokec8 'Female'\cf6 \strokec6  \cf4 \strokec4 ELSE\cf6 \strokec6  \cf8 \strokec8 'Unknow'\cf6 \strokec6  \cf4 \strokec4 END\cf6 \strokec6 ,\cb1 \
+\cb5         EmailAddress,\cb1 \
+\cb5         EnglishEducation \cf4 \strokec4 AS\cf6 \strokec6  Education,\cb1 \
+\cb5         Phone,\cb1 \
+\cb5         AddressLine1,\cb1 \
+\cb5         AddressLine2\cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 FROM\cf6 \strokec6  \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         DimCustomer c\cb1 \
+\cb5         \cf4 \strokec4 JOIN\cf6 \strokec6  DimGeography g \cf4 \strokec4 ON\cf6 \strokec6  c.GeographyKey \cf9 \strokec9 =\cf6 \strokec6  g.GeographyKey\cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 WHERE\cf6 \cb1 \strokec6 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         g.CountryRegionCode \cf9 \strokec9 =\cf6 \strokec6  \cf8 \strokec8 'GB'\cf6 \cb1 \strokec6 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 -- ****BAI 2\cf6 \cb1 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec6 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 SELECT\cf6 \cb1 \strokec6 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         g.EnglishCountryRegionName \cf4 \strokec4 AS\cf6 \strokec6  CountryName,\cb1 \
+\cb5         \cf7 \strokec7 COUNT\cf6 \strokec6 (g.EnglishCountryRegionName) \cf4 \strokec4 AS\cf6 \strokec6  TotalCustomer\cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 FROM\cf6 \cb1 \strokec6 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         DimCustomer c \cb1 \
+\cb5         \cf4 \strokec4 JOIN\cf6 \strokec6  DimGeography g \cf4 \strokec4 ON\cf6 \strokec6  c.GeographyKey \cf9 \strokec9 =\cf6 \strokec6  g.GeographyKey\cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 GROUP BY\cf6 \cb1 \strokec6 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         g.EnglishCountryRegionName\cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 ORDER BY\cf6 \strokec6  \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         g.EnglishCountryRegionName \cf4 \strokec4 ASC\cf6 \cb1 \strokec6 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 \cb5 \strokec10 -- **** BAI 3\cf6 \cb1 \strokec6 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  \cf4 \strokec4 TOP\cf6 \strokec6 (\cf11 \strokec11 100\cf6 \strokec6 )\cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         p.EnglishProductName \cf4 \strokec4 AS\cf6 \strokec6  ProductName,\cb1 \
+\cb5         p.ModelName,\cb1 \
+\cb5         p.ProductLine,\cb1 \
+\cb5         pc.EnglishProductCategoryName \cf4 \strokec4 AS\cf6 \strokec6  ProductCategoryName,\cb1 \
+\cb5         ps.EnglishProductSubcategoryName \cf4 \strokec4 AS\cf6 \strokec6  ProductSubcategoryName,\cb1 \
+\cb5         p.DealerPrice,\cb1 \
+\cb5         p.ListPrice,\cb1 \
+\cb5         p.Color,\cb1 \
+\cb5         p.EnglishDescription \cf4 \strokec4 AS\cf6 \strokec6  \cf4 \strokec4 Description\cf6 \cb1 \strokec6 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 FROM\cf6 \strokec6   \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         DimProduct p \cb1 \
+\cb5         \cf4 \strokec4 JOIN\cf6 \strokec6  DimProductSubcategory ps \cf4 \strokec4 ON\cf6 \strokec6  p.ProductSubcategoryKey  \cf9 \strokec9 =\cf6 \strokec6  ps.ProductSubcategoryKey\cb1 \
+\cb5         \cf4 \strokec4 JOIN\cf6 \strokec6  DimProductCategory pc \cf4 \strokec4 ON\cf6 \strokec6  ps.ProductCategoryKey \cf9 \strokec9 =\cf6 \strokec6  pc.ProductCategoryKey\cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 ORDER BY\cf6 \strokec6  \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         p.ListPrice \cf4 \strokec4 DESC\cf6 \cb1 \strokec6 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 \cb5 \strokec10 --**** BAI 5\cf6 \cb1 \strokec6 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         f.ProductKey,\cb1 \
+\cb5         p.EnglishProductName \cf4 \strokec4 AS\cf6 \strokec6  ProductName,\cb1 \
+\cb5         p.ModelName,\cb1 \
+\cb5         pc.EnglishProductCategoryName \cf4 \strokec4 AS\cf6 \strokec6  ProductCategoryName,\cb1 \
+\cb5         ps.EnglishProductSubcategoryName \cf4 \strokec4 AS\cf6 \strokec6  ProductSubcategoryName,\cb1 \
+\cb5         f.UnitsBalance,\cb1 \
+\cb5         f.UnitCost\cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 FROM\cf6 \strokec6  \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         FactProductInventory f \cb1 \
+\cb5         \cf4 \strokec4 JOIN\cf6 \strokec6 ( \cf4 \strokec4 SELECT\cf6 \strokec6  ProductKey, \cf7 \strokec7 MAX\cf6 \strokec6 (MovementDate) \cf4 \strokec4 AS\cf6 \strokec6  LastestDate \cf4 \strokec4 FROM\cf6 \strokec6  FactProductInventory \cf4 \strokec4 GROUP BY\cf6 \strokec6  ProductKey) \cf4 \strokec4 AS\cf6 \strokec6  fld\cb1 \
+\cb5         \cf4 \strokec4 ON\cf6 \strokec6  f.ProductKey \cf9 \strokec9 =\cf6 \strokec6  fld.ProductKey \cf4 \strokec4 AND\cf6 \strokec6  f.MovementDate \cf9 \strokec9 =\cf6 \strokec6  fld.LastestDate\cb1 \
+\cb5         \cf4 \strokec4 JOIN\cf6 \strokec6  DimProduct p \cf4 \strokec4 ON\cf6 \strokec6  f.ProductKey \cf9 \strokec9 =\cf6 \strokec6  p.ProductKey\cb1 \
+\cb5         \cf4 \strokec4 JOIN\cf6 \strokec6  DimProductSubcategory ps \cf4 \strokec4 ON\cf6 \strokec6  p.ProductSubcategoryKey \cf9 \strokec9 =\cf6 \strokec6  ps.ProductSubcategoryKey\cb1 \
+\cb5         \cf4 \strokec4 JOIN\cf6 \strokec6  DimProductCategory pc \cf4 \strokec4 ON\cf6 \strokec6  ps.ProductCategoryKey \cf9 \strokec9 =\cf6 \strokec6  pc.ProductCategoryKey\cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 \cb5 \strokec10 -- **** BAI 6\cf6 \cb1 \strokec6 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  \cf4 \strokec4 TOP\cf6 \strokec6  \cf11 \strokec11 10\cf6 \cb1 \strokec6 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         p.EnglishProductName \cf4 \strokec4 AS\cf6 \strokec6  ProductName,\cb1 \
+\cb5         p.ModelName,\cb1 \
+\cb5         pc.EnglishProductCategoryName \cf4 \strokec4 AS\cf6 \strokec6  ProductCategoryName,\cb1 \
+\cb5         ps.EnglishProductSubcategoryName \cf4 \strokec4 AS\cf6 \strokec6  ProductSubcategoryName,\cb1 \
+\cb5         f.UnitsBalance,\cb1 \
+\cb5         f.UnitCost\cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 FROM\cf6 \strokec6  \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         FactProductInventory f \cb1 \
+\cb5         \cf4 \strokec4 JOIN\cf6 \strokec6 ( \cf4 \strokec4 SELECT\cf6 \strokec6  ProductKey, \cf7 \strokec7 MAX\cf6 \strokec6 (MovementDate) \cf4 \strokec4 AS\cf6 \strokec6  LastestDate \cf4 \strokec4 FROM\cf6 \strokec6  FactProductInventory \cf4 \strokec4 GROUP BY\cf6 \strokec6  ProductKey) \cf4 \strokec4 AS\cf6 \strokec6  fld\cb1 \
+\cb5         \cf4 \strokec4 ON\cf6 \strokec6  f.ProductKey \cf9 \strokec9 =\cf6 \strokec6  fld.ProductKey \cf4 \strokec4 AND\cf6 \strokec6  f.MovementDate \cf9 \strokec9 =\cf6 \strokec6  fld.LastestDate\cb1 \
+\cb5         \cf4 \strokec4 JOIN\cf6 \strokec6  DimProduct p \cf4 \strokec4 ON\cf6 \strokec6  f.ProductKey \cf9 \strokec9 =\cf6 \strokec6  p.ProductKey\cb1 \
+\cb5         \cf4 \strokec4 JOIN\cf6 \strokec6  DimProductSubcategory ps \cf4 \strokec4 ON\cf6 \strokec6  p.ProductSubcategoryKey \cf9 \strokec9 =\cf6 \strokec6  ps.ProductSubcategoryKey\cb1 \
+\cb5         \cf4 \strokec4 JOIN\cf6 \strokec6  DimProductCategory pc \cf4 \strokec4 ON\cf6 \strokec6  ps.ProductCategoryKey \cf9 \strokec9 =\cf6 \strokec6  pc.ProductCategoryKey\cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 ORDER BY\cf6 \strokec6  UnitCost \cf4 \strokec4 DESC\cf6 \cb1 \strokec6 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 \cb5 \strokec10 \'97**** Bai 8\cf6 \cb1 \strokec6 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 SELECT\cf6 \cb1 \strokec6 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         f.SalesOrderNumber,\cb1 \
+\cb5         f.SalesOrderLineNumber,\cb1 \
+\cb5         \cf7 \strokec7 CONCAT\cf6 \strokec6 (dc.FirstName,\cf8 \strokec8 ' '\cf6 \strokec6 ,dc.MiddleName,\cf8 \strokec8 ' '\cf6 \strokec6 ,dc.LastName) \cf4 \strokec4 AS\cf6 \strokec6  CustomerName,\cb1 \
+\cb5         dp.EnglishProductName \cf4 \strokec4 AS\cf6 \strokec6  ProductName,\cb1 \
+\cb5         f.OrderQuantity,\cb1 \
+\cb5         f.UnitPrice,\cb1 \
+\cb5         f.DiscountAmount,\cb1 \
+\cb5         f.SalesAmount,\cb1 \
+\cb5         f.ProductStandardCost,\cb1 \
+\cb5         f.TotalProductCost\cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 FROM\cf6 \strokec6  \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         FactInternetSales f \cb1 \
+\cb5         \cf4 \strokec4 JOIN\cf6 \strokec6  DimCustomer dc \cf4 \strokec4 ON\cf6 \strokec6  f.CustomerKey \cf9 \strokec9 =\cf6 \strokec6  dc.CustomerKey\cb1 \
+\cb5         \cf4 \strokec4 JOIN\cf6 \strokec6  DimProduct dp \cf4 \strokec4 ON\cf6 \strokec6  f.ProductKey \cf9 \strokec9 =\cf6 \strokec6  dp.ProductKey\cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 WHERE\cf6 \strokec6  dp.EnglishProductName \cf9 \strokec9 =\cf6 \strokec6  \cf8 \strokec8 'Road-150 Red, 48'\cf6 \cb1 \strokec6 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 \cb5 \strokec10 \'97**** Bai 9\cf6 \cb1 \strokec6 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  \cf4 \strokec4 TOP\cf6 \strokec6  \cf11 \strokec11 20\cf6 \cb1 \strokec6 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         \cf7 \strokec7 CONCAT\cf6 \strokec6 (d.FirstName,\cf8 \strokec8 ' '\cf6 \strokec6 ,d.MiddleName,\cf8 \strokec8 ' '\cf6 \strokec6 ,d.LastName) \cf4 \strokec4 AS\cf6 \strokec6  CustomerName,\cb1 \
+\cb5         f.SalesOrderNumber,\cb1 \
+\cb5         f.CustomerKey,\cb1 \
+\cb5         f.TotalProductCost \cf4 \strokec4 AS\cf6 \strokec6  TotalOrderCost\cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 FROM\cf6 \cb1 \strokec6 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         FactInternetSales f \cb1 \
+\cb5         \cf4 \strokec4 JOIN\cf6 \strokec6  DimCustomer d \cf4 \strokec4 ON\cf6 \strokec6  f.CustomerKey \cf9 \strokec9 =\cf6 \strokec6  d.CustomerKey \cb1 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 ORDER BY\cf6 \strokec6  TotalProductCost \cf4 \strokec4 DESC\cf6 \cb1 \strokec6 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5  \cb1 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 \cb5 \strokec10 --**** Bai 10\cf6 \cb1 \strokec6 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 SELECT\cf6 \strokec6  \cf4 \strokec4 TOP\cf6 \strokec6  \cf11 \strokec11 10\cf6 \cb1 \strokec6 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         d.ResellerName,\cb1 \
+\cb5         d.ResellerKey,\cb1 \
+\cb5         \cf7 \strokec7 SUM\cf6 \strokec6 (f.OrderQuantity) \cf4 \strokec4 AS\cf6 \strokec6  TotalQuantity,\cb1 \
+\cb5         \cf7 \strokec7 SUM\cf6 \strokec6 (f.TotalProductCost) \cf4 \strokec4 AS\cf6 \strokec6  TotalOrderCost   \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 FROM\cf6 \strokec6  \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 \cb5         FactResellerSales f \cb1 \
+\cb5         \cf4 \strokec4 JOIN\cf6 \strokec6  DimReseller d \cf4 \strokec4 on\cf6 \strokec6  f.ResellerKey \cf9 \strokec9 =\cf6 \strokec6  d.ResellerKey\cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 \strokec4 GROUP BY\cf6 \strokec6  d.ResellerKey , d.ResellerName\cb1 \
+\cf4 \cb5 \strokec4 ORDER BY\cf6 \strokec6  TotalOrderCost \cf4 \strokec4 DESC\cf6 \cb1 \strokec6 \
+\
+\
+}
