@@ -1,0 +1,129 @@
+-- ****BAI 1
+SELECT 
+        CONCAT(FirstName,' ',MiddleName,' ',LastName) AS FullName,
+        BirthDate,
+        CASE WHEN Gender = 'M' THEN 'MALE' WHEN Gender = 'F' THEN 'Female' ELSE 'Unknow' END,
+        EmailAddress,
+        EnglishEducation AS Education,
+        Phone,
+        AddressLine1,
+        AddressLine2
+FROM 
+        DimCustomer c
+        JOIN DimGeography g ON c.GeographyKey = g.GeographyKey
+WHERE
+        g.CountryRegionCode = 'GB'
+
+-- ****BAI 2
+
+SELECT
+        g.EnglishCountryRegionName AS CountryName,
+        COUNT(g.EnglishCountryRegionName) AS TotalCustomer
+FROM
+        DimCustomer c 
+        JOIN DimGeography g ON c.GeographyKey = g.GeographyKey
+GROUP BY
+        g.EnglishCountryRegionName
+ORDER BY 
+        g.EnglishCountryRegionName ASC
+
+-- **** BAI 3
+
+SELECT TOP(100)
+        p.EnglishProductName AS ProductName,
+        p.ModelName,
+        p.ProductLine,
+        pc.EnglishProductCategoryName AS ProductCategoryName,
+        ps.EnglishProductSubcategoryName AS ProductSubcategoryName,
+        p.DealerPrice,
+        p.ListPrice,
+        p.Color,
+        p.EnglishDescription AS Description
+FROM  
+        DimProduct p 
+        JOIN DimProductSubcategory ps ON p.ProductSubcategoryKey  = ps.ProductSubcategoryKey
+        JOIN DimProductCategory pc ON ps.ProductCategoryKey = pc.ProductCategoryKey
+ORDER BY 
+        p.ListPrice DESC
+
+--**** BAI 5
+
+SELECT 
+        f.ProductKey,
+        p.EnglishProductName AS ProductName,
+        p.ModelName,
+        pc.EnglishProductCategoryName AS ProductCategoryName,
+        ps.EnglishProductSubcategoryName AS ProductSubcategoryName,
+        f.UnitsBalance,
+        f.UnitCost
+FROM 
+        FactProductInventory f 
+        JOIN( SELECT ProductKey, MAX(MovementDate) AS LastestDate FROM FactProductInventory GROUP BY ProductKey) AS fld
+        ON f.ProductKey = fld.ProductKey AND f.MovementDate = fld.LastestDate
+        JOIN DimProduct p ON f.ProductKey = p.ProductKey
+        JOIN DimProductSubcategory ps ON p.ProductSubcategoryKey = ps.ProductSubcategoryKey
+        JOIN DimProductCategory pc ON ps.ProductCategoryKey = pc.ProductCategoryKey
+
+-- **** BAI 6
+
+SELECT TOP 10
+        p.EnglishProductName AS ProductName,
+        p.ModelName,
+        pc.EnglishProductCategoryName AS ProductCategoryName,
+        ps.EnglishProductSubcategoryName AS ProductSubcategoryName,
+        f.UnitsBalance,
+        f.UnitCost
+FROM 
+        FactProductInventory f 
+        JOIN( SELECT ProductKey, MAX(MovementDate) AS LastestDate FROM FactProductInventory GROUP BY ProductKey) AS fld
+        ON f.ProductKey = fld.ProductKey AND f.MovementDate = fld.LastestDate
+        JOIN DimProduct p ON f.ProductKey = p.ProductKey
+        JOIN DimProductSubcategory ps ON p.ProductSubcategoryKey = ps.ProductSubcategoryKey
+        JOIN DimProductCategory pc ON ps.ProductCategoryKey = pc.ProductCategoryKey
+ORDER BY UnitCost DESC
+
+—**** Bai 8
+SELECT
+        f.SalesOrderNumber,
+        f.SalesOrderLineNumber,
+        CONCAT(dc.FirstName,' ',dc.MiddleName,' ',dc.LastName) AS CustomerName,
+        dp.EnglishProductName AS ProductName,
+        f.OrderQuantity,
+        f.UnitPrice,
+        f.DiscountAmount,
+        f.SalesAmount,
+        f.ProductStandardCost,
+        f.TotalProductCost
+FROM 
+        FactInternetSales f 
+        JOIN DimCustomer dc ON f.CustomerKey = dc.CustomerKey
+        JOIN DimProduct dp ON f.ProductKey = dp.ProductKey
+WHERE dp.EnglishProductName = 'Road-150 Red, 48'
+
+—**** Bai 9
+SELECT TOP 20
+        CONCAT(d.FirstName,' ',d.MiddleName,' ',d.LastName) AS CustomerName,
+        f.SalesOrderNumber,
+        f.CustomerKey,
+        f.TotalProductCost AS TotalOrderCost
+FROM
+        FactInternetSales f 
+        JOIN DimCustomer d ON f.CustomerKey = d.CustomerKey 
+
+ORDER BY TotalProductCost DESC
+ 
+
+--**** Bai 10
+
+SELECT TOP 10
+        d.ResellerName,
+        d.ResellerKey,
+        SUM(f.OrderQuantity) AS TotalQuantity,
+        SUM(f.TotalProductCost) AS TotalOrderCost   
+FROM 
+        FactResellerSales f 
+        JOIN DimReseller d on f.ResellerKey = d.ResellerKey
+GROUP BY d.ResellerKey , d.ResellerName
+ORDER BY TotalOrderCost DESC
+
+
